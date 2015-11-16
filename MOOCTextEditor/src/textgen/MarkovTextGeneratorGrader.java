@@ -14,10 +14,10 @@ public class MarkovTextGeneratorGrader {
             int incorrect = 0;
             int tests = 0;
             String feedback = "";
-
+            //System.out.println(gen.toString());
             feedback += "\n** Test 1: Generating text before training...";
-            try {
-                String s = gen.generateText(20);
+            try {                
+            	String s = gen.generateText(20);
                 feedback += "No error thrown. ";
             } catch (Exception e) {
                 feedback += "Error thrown. ";
