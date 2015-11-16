@@ -52,6 +52,8 @@ public class MarkovTextGeneratorGrader {
                     wordCounts.put(w, 1);
                 }
             }
+            
+            
 
             feedback += "\n** Test #4: Testing specific word counts...";
             feedback += "'I' appeared " + wordCounts.get("I") + " times. ";
