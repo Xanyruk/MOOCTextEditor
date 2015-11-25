@@ -34,6 +34,7 @@ public class AutoCompleteDictionaryTrieTester {
 		largeDict = new AutoCompleteDictionaryTrie();
 
 		smallDict.addWord("Hello");
+		//smallDict.size();
 		smallDict.addWord("HElLo");
 		smallDict.addWord("help");
 		smallDict.addWord("he");
