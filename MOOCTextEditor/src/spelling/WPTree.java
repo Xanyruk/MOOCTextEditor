@@ -27,9 +27,9 @@ public class WPTree implements WordPath {
 	public WPTree () {
 		this.root = null;
 		// TODO initialize a NearbyWords object
-		// Dictionary d = new DictionaryHashSet();
-		// DictionaryLoader.loadDictionary(d, "data/dict.txt");
-		// this.nw = new NearbyWords(d);
+		Dictionary d = new DictionaryHashSet();
+		DictionaryLoader.loadDictionary(d, "data/dict.txt");
+		this.nw = new NearbyWords(d);
 	}
 	
 	//This constructor will be used by the grader code
@@ -42,7 +42,47 @@ public class WPTree implements WordPath {
 	public List<String> findPath(String word1, String word2) 
 	{
 	    // TODO: Implement this method.
-	    return new LinkedList<String>();
+		//System.out.println("word1: "+word1);
+		//System.out.println("word2: "+word2);
+		List<WPTreeNode> queue=new LinkedList<WPTreeNode>();
+		HashSet<String> visited = new HashSet<String>();
+		//List<String> path=new LinkedList<String>();
+		
+		root=new WPTreeNode(word1,null);
+		visited.add(word1);
+		queue.add(root);
+		WPTreeNode curr;
+		
+		while(!visited.contains(word2) && !queue.isEmpty()&& queue.size()<1000)
+		{
+			//System.out.println("queue: "+queue.toString());
+			
+			curr=queue.remove(0);
+			if(!visited.contains(curr.getWord()))
+			{
+				visited.add(curr.getWord());
+				if(curr.getWord().equals(word2))
+				{
+					//System.out.println("path: "+curr.buildPathToRoot().toString());
+					return curr.buildPathToRoot();
+				}
+			}
+			List<String> neighbors=nw.distanceOne(curr.getWord(), true);
+			for(String n:neighbors)
+			{
+				WPTreeNode nNode=new WPTreeNode(n,curr);
+				curr.addChild(n);
+				queue.add(nNode);
+				
+			}
+			//System.out.println(curr.toString());
+			//System.out.println("neighbors: "+neighbors.toString());
+			//System.out.println("queue: "+printQueue(queue));
+			
+			//System.out.println("visited: "+visited.toString());
+			
+		}
+	    return null;
 	}
 	
 	// Method to print a list of WPTreeNodes (useful for debugging)
